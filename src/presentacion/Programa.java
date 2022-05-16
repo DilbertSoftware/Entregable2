@@ -116,12 +116,9 @@ public class Programa extends JFrame {
 	             		
 	             }
 	             ultimaImagen++;
-	         }
-	         
+	         }    
 	     };
-	     
-
-	      // Aquí se pone en marcha el timer cada segundo.
+	     // Aquí se pone en marcha el timer cada segundo.
 	     timer = new Timer();
 	     // Dentro de 0 milisegundos avísame cada 1000 milisegundos
 	     timer.scheduleAtFixedRate(tarea, 0, 2000);

@@ -4,12 +4,14 @@ public class Vehiculo {
 	private int idVehiculo;
 	private String nombre;
 	private String color;
-	
-	public Vehiculo(int idVehiculo, String nombre, String color) {
+	private static int autoNumerico=1;
+	public Vehiculo( String nombre, String color) {
 		super();
-		this.idVehiculo = idVehiculo;
+		this.idVehiculo = autoNumerico;
+		autoNumerico++;
 		this.nombre = nombre;
 		this.color = color;
+		
 	}
 
 	public String getNombre() {

@@ -55,7 +55,7 @@ public class FrmAltaPersona extends JFrame {
 		this.menu=frmMenu;
 		this.personas=personas;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 466, 402);
+		setBounds(100, 100, 466, 314);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -123,7 +123,7 @@ public class FrmAltaPersona extends JFrame {
 				agregar();
 			}
 		});
-		btnNewButton.setBounds(150, 265, 89, 23);
+		btnNewButton.setBounds(35, 239, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnVolver = new JButton("Volver");
@@ -132,7 +132,7 @@ public class FrmAltaPersona extends JFrame {
 				volver();
 			}
 		});
-		btnVolver.setBounds(306, 265, 89, 23);
+		btnVolver.setBounds(306, 239, 89, 23);
 		contentPane.add(btnVolver);
 	}
 
