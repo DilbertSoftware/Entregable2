@@ -24,6 +24,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -34,7 +35,7 @@ public class FrmAltaPersona extends JFrame {
 	private JTextField txtApellido;
 	private JTextField txtNombre;
 	private FrmMenu menu;
-	private Persona[]personas;
+	private LinkedList<Persona>personas;
 	private JComboBox<String> cbxDepartamento;
 	private JComboBox<String> cbxCantidadHijos;
 	private DatePicker picker;
@@ -43,7 +44,7 @@ public class FrmAltaPersona extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmAltaPersona(FrmMenu frmMenu, Persona[] personas) {
+	public FrmAltaPersona(FrmMenu frmMenu, LinkedList<Persona> personas) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -160,21 +161,10 @@ public class FrmAltaPersona extends JFrame {
 		}
 	}
 
-	private int indiceLibre() throws CapacidadLlenaException
-	{
-		int i=0;
-		while(i<personas.length &&personas[i]!=null)
-		{
-			i++;
-		}
-		if(i==personas.length)
-			throw new CapacidadLlenaException();
-		return i;
-	}
+	
 	public void agregar(Persona persona) throws CapacidadLlenaException
 	{
-		int posicion=indiceLibre();
-		persona.setIdPersona(posicion+1);
-		personas[posicion]=persona;
+		persona.setIdPersona(personas.size()+1);
+		personas.add(persona);
 	}
 }

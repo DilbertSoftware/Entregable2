@@ -12,6 +12,7 @@ import logica.Persona;
 import javax.swing.JList;
 import javax.swing.JButton;
 import java.beans.PropertyChangeListener;
+import java.util.LinkedList;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -20,17 +21,21 @@ public class FrmListado extends JFrame {
 
 	private JPanel contentPane;
 	private JList lstPersona;
-	
+	private FrmMenu menu;
+	private LinkedList<Persona>personas;
 	
 
 	/**
 	 * Create the frame.
+	 * @param personas 
+	 * @param frmMenu 
 	 * @param persona 
 	 * @param frmListado 
 	 */
-	public FrmListado() {
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public FrmListado(FrmMenu menu, LinkedList<Persona> personas) {
+		this.menu=menu;
+		this.personas=personas;
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 623, 439);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,6 +49,7 @@ public class FrmListado extends JFrame {
 			}
 		});
 		lstPersona.setBounds(22, 30, 394, 295);
+		this.lstPersona.setListData(personas.toArray());
 		contentPane.add(lstPersona);
 		
 		JButton btnNewButton = new JButton("Listado");

@@ -23,13 +23,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
 import java.awt.Toolkit;
 
 public class FrmMenu extends JFrame {
 
 	
 	private JPanel contentPane;
-	private Persona[] persona;
+	private LinkedList<Persona> personas;
 
 
 	/**
@@ -88,7 +89,7 @@ public class FrmMenu extends JFrame {
 			}
 		});
 		
-		persona=new Persona[Util.TAMANIO_ARRAY];
+		personas=new LinkedList<>();
 		btnNewButton.setToolTipText("Alta de persona");
 		btnNewButton.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/botonAgregar.png")));
 		btnNewButton.setBounds(10, 11, 72, 74);
@@ -103,19 +104,37 @@ public class FrmMenu extends JFrame {
 		btnNewButton_1.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/botonBuscar.png")));
 		btnNewButton_1.setBounds(16, 109, 66, 74);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listado();
+			}
+		});
+		btnNewButton_1_1.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/botonListado.png")));
+		btnNewButton_1_1.setBounds(16, 202, 66, 74);
+		contentPane.add(btnNewButton_1_1);
 	}
 
 	
 
+	protected void listado() {
+		FrmListado formulario=new FrmListado(this,personas);
+		formulario.setVisible(true);
+		
+	}
+
+
+
 	protected void busqueda() {
-		FrmBusqueda formulario=new FrmBusqueda(this,persona);
+		FrmBusqueda formulario=new FrmBusqueda(this,personas);
 		formulario.setVisible(true);
 		this.setEnabled(false);
 		
 	}
 
 	protected void altaPersona() {
-		FrmAltaPersona formulario=new FrmAltaPersona(this,persona);
+		FrmAltaPersona formulario=new FrmAltaPersona(this,personas);
 		formulario.setVisible(true);
 		this.setEnabled(false);
 	}

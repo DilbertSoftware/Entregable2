@@ -22,6 +22,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.LinkedList;
+
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JScrollBar;
@@ -33,12 +35,12 @@ public class FrmBusqueda extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNombre;
-	private JList<Persona> lstResultado;
+	private JList<Object> lstResultado;
 	private JComboBox cbxMinimoHijo;
 	private JComboBox cbxMaximoHijos;
 	private JComboBox cbxMinimoEdad;
 	private JComboBox cbxMaximoEdad;
-	private Persona[] personas;
+	private LinkedList<Persona> personas;
 	private FrmMenu menu;
 	private JTextField txtApellido;
 	private JCheckBox chkEdad;
@@ -46,7 +48,7 @@ public class FrmBusqueda extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmBusqueda(FrmMenu menu,Persona[] personas) {
+	public FrmBusqueda(FrmMenu menu,LinkedList<Persona> personas) {
 		setTitle("B\u00FAsqueda - Dilbert Software ");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmBusqueda.class.getResource("/imagenes/logo.png")));
 		addWindowListener(new WindowAdapter() {
@@ -201,12 +203,12 @@ public class FrmBusqueda extends JFrame {
 		
 		int edadMinima=cbxMinimoEdad.getSelectedIndex()+17;
 		int edadMaxima=cbxMaximoEdad.getSelectedIndex()+17;
-		Persona[] resultado=new Persona[personas.length];
-		int i=0;
+		LinkedList<Persona> resultado=new LinkedList<>();
 		
-		for(int indice=0;indice<personas.length;indice++)
+		
+		for(int indice=0;indice<personas.size();indice++)
 		{
-			Persona persona=personas[indice];
+			Persona persona=personas.get(indice);
 			try
 			{
 				if((nombre.isEmpty() || persona.getNombre().toUpperCase().contains(nombre)) && 
@@ -214,15 +216,15 @@ public class FrmBusqueda extends JFrame {
 						(!chkEdad.isSelected() || (edadMinima<=  persona.edad() && persona.edad()<=edadMaxima) ) && 
 						(!chkHijos.isSelected() || (cantidadHijosMinimo<=persona.getCantHijos() && persona.getCantHijos()<=cantidadHijosMaximo))  )
 				{
-					resultado[i]=persona;
-					i++;
+					resultado.add(persona);
+					
 				}
 			}catch(Exception ex)
 			{
 				
 			}
 		}
-		lstResultado.setListData(resultado);
+		lstResultado.setListData(resultado.toArray());
 		
 	}
 }
