@@ -1,6 +1,7 @@
 package logica;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import logica.exception.VehiculoException;
@@ -120,6 +121,16 @@ public class Persona {
 		else {
 			throw new VehiculoException("El vehiculo ya lo tiene");
 		}
+	}
+	
+	public Iterator<Vehiculo> listadoVehiculos()
+	{
+		return listaVehiculos.iterator();
+	}
+	
+	public Object[] getVehiculos()
+	{
+		return listaVehiculos.toArray();
 	}
 	
 }

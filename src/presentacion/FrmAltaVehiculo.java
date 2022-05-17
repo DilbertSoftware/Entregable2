@@ -46,12 +46,13 @@ public class FrmAltaVehiculo extends JFrame {
 	private JTextField txtDato2;
 	private JButton btnVolver;
 	private Persona persona;
-
+	private FrmVisualizar visualizar;
 	/**
 	 * Create the frame.
 	 */
-	public FrmAltaVehiculo(Persona persona) {
+	public FrmAltaVehiculo(FrmVisualizar visualizar,  Persona persona) {
 		this.persona=persona;
+		this.visualizar=visualizar;
 		setTitle("Alta Vehiculo - Dilbert Software");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 377, 345);
