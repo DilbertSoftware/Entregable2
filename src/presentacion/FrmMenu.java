@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import logica.Espaniol;
+import logica.Idioma;
+import logica.Ingles;
 import logica.Persona;
 import logica.Util;
 
@@ -30,7 +33,20 @@ public class FrmMenu extends JFrame {
 
 	
 	private JPanel contentPane;
+	private Idioma idioma;
 	private LinkedList<Persona> personas;
+	private JMenu mnNewMenu;
+	private JMenuItem mntmNewMenuItem;
+	private JMenu mnNewMenu_1;
+	private JMenuItem mntmNewMenuItem_1;
+	private JMenuItem mntmNewMenuItem_2;
+	private JMenu mnNewMenu_3;
+	private JMenuItem mntmNewMenuItem_3;
+	private JMenuItem mntmNewMenuItem_4;
+	private JMenu mnNewMenu_2;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_1_1;
 
 
 	/**
@@ -45,16 +61,16 @@ public class FrmMenu extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Archivo");
+		mnNewMenu = new JMenu("Archivo");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
+		mntmNewMenuItem = new JMenuItem("Salir");
 		mnNewMenu.add(mntmNewMenuItem);
 		
-		JMenu mnNewMenu_1 = new JMenu("Persona");
+		mnNewMenu_1 = new JMenu("Persona");
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Alta");
+		mntmNewMenuItem_1 = new JMenuItem("Alta");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				altaPersona();
@@ -62,10 +78,29 @@ public class FrmMenu extends JFrame {
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_1);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Buscar");
+		mntmNewMenuItem_2 = new JMenuItem("Buscar");
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
-		JMenu mnNewMenu_2 = new JMenu("Acerca de");
+		mnNewMenu_3 = new JMenu("Idioma");
+		menuBar.add(mnNewMenu_3);
+		
+		mntmNewMenuItem_3 = new JMenuItem("Espa\u00F1ol");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				idiomaEspaniol();
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_3);
+		
+		mntmNewMenuItem_4 = new JMenuItem("Ingles");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				idiomaIngles();
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_4);
+		
+		mnNewMenu_2 = new JMenu("Acerca de");
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuBar menuBar_1 = new JMenuBar();
@@ -81,7 +116,7 @@ public class FrmMenu extends JFrame {
 		lblNewLabel.setBounds(113, 11, 473, 440);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("");
+		btnNewButton = new JButton("");
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,7 +130,7 @@ public class FrmMenu extends JFrame {
 		btnNewButton.setBounds(10, 11, 72, 74);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1 = new JButton("");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				busqueda();
@@ -105,7 +140,7 @@ public class FrmMenu extends JFrame {
 		btnNewButton_1.setBounds(16, 109, 66, 74);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("");
+		btnNewButton_1_1 = new JButton("");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listado();
@@ -114,12 +149,31 @@ public class FrmMenu extends JFrame {
 		btnNewButton_1_1.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/botonListado.png")));
 		btnNewButton_1_1.setBounds(16, 202, 66, 74);
 		contentPane.add(btnNewButton_1_1);
+		idioma=new Espaniol();
 	}
 
 	
 
+	protected void idiomaIngles() {
+		idioma=new Ingles();
+		idioma.inicializar();
+		porDefecto();
+		traduccion();
+	}
+
+
+
+	protected void idiomaEspaniol() {
+		idioma=new Espaniol();
+		idioma.inicializar();
+		porDefecto();
+		traduccion();
+	}
+
+
+
 	protected void listado() {
-		FrmListado formulario=new FrmListado(this,personas);
+		FrmListado formulario=new FrmListado(this,personas,idioma);
 		formulario.setVisible(true);
 		
 	}
@@ -127,15 +181,42 @@ public class FrmMenu extends JFrame {
 
 
 	protected void busqueda() {
-		FrmBusqueda formulario=new FrmBusqueda(this,personas);
+		FrmBusqueda formulario=new FrmBusqueda(this,personas,idioma);
 		formulario.setVisible(true);
 		this.setEnabled(false);
 		
 	}
 
 	protected void altaPersona() {
-		FrmAltaPersona formulario=new FrmAltaPersona(this,personas);
+		FrmAltaPersona formulario=new FrmAltaPersona(this,personas,idioma);
 		formulario.setVisible(true);
 		this.setEnabled(false);
 	}
+	
+	private void porDefecto()
+	{
+		mnNewMenu.setText("archivo");
+		mntmNewMenuItem.setText("salir");
+		mnNewMenu_1.setText("persona");
+		mntmNewMenuItem_1.setText("alta");
+		mntmNewMenuItem_2.setText("buscar");
+		mntmNewMenuItem_3.setText("espaniol");
+		mntmNewMenuItem_4.setText("ingles");
+		mnNewMenu_2.setText("acerca de");
+		
+	}
+	
+	private void traduccion()
+	{
+		mnNewMenu.setText(idioma.traduccion("archivo"));
+		mntmNewMenuItem.setText(idioma.traduccion("salir"));
+		mnNewMenu_1.setText(idioma.traduccion("persona"));
+		mntmNewMenuItem_1.setText(idioma.traduccion("alta"));
+		mntmNewMenuItem_2.setText(idioma.traduccion("buscar"));
+		mntmNewMenuItem_3.setText(idioma.traduccion(mntmNewMenuItem_3.getText()));
+		mntmNewMenuItem_4.setText(idioma.traduccion("ingles"));
+		mnNewMenu_2.setText(idioma.traduccion("acerca de"));
+	}
+	
+	
 }

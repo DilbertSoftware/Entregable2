@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import logica.Idioma;
 import logica.Persona;
 
 import java.awt.GridLayout;
@@ -45,11 +46,14 @@ public class FrmBusqueda extends JFrame {
 	private JTextField txtApellido;
 	private JCheckBox chkEdad;
 	private JCheckBox chkHijos;
+	private Idioma idioma;
 	/**
 	 * Create the frame.
+	 * @param idioma 
 	 */
-	public FrmBusqueda(FrmMenu menu,LinkedList<Persona> personas) {
+	public FrmBusqueda(FrmMenu menu,LinkedList<Persona> personas, Idioma idioma) {
 		setTitle("B\u00FAsqueda - Dilbert Software ");
+		this.idioma=idioma;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmBusqueda.class.getResource("/imagenes/logo.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override

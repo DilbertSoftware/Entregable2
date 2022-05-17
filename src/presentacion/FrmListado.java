@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import logica.Idioma;
 import logica.Persona;
 
 import javax.swing.JList;
@@ -23,18 +24,20 @@ public class FrmListado extends JFrame {
 	private JList lstPersona;
 	private FrmMenu menu;
 	private LinkedList<Persona>personas;
-	
+	private Idioma idioma;
 
 	/**
 	 * Create the frame.
 	 * @param personas 
+	 * @param idioma 
 	 * @param frmMenu 
 	 * @param persona 
 	 * @param frmListado 
 	 */
-	public FrmListado(FrmMenu menu, LinkedList<Persona> personas) {
+	public FrmListado(FrmMenu menu, LinkedList<Persona> personas, Idioma idioma) {
 		this.menu=menu;
 		this.personas=personas;
+		this.idioma=idioma;
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 623, 439);
 		contentPane = new JPanel();

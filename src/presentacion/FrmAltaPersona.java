@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import org.jdatepicker.DatePicker;
 import org.jdatepicker.JDatePicker;
 
+import logica.Idioma;
 import logica.Persona;
 import logica.Util;
 import logica.exception.CapacidadLlenaException;
@@ -39,12 +40,14 @@ public class FrmAltaPersona extends JFrame {
 	private JComboBox<String> cbxDepartamento;
 	private JComboBox<String> cbxCantidadHijos;
 	private DatePicker picker;
+	private Idioma idioma;
 
 
 	/**
 	 * Create the frame.
+	 * @param idioma 
 	 */
-	public FrmAltaPersona(FrmMenu frmMenu, LinkedList<Persona> personas) {
+	public FrmAltaPersona(FrmMenu frmMenu, LinkedList<Persona> personas, Idioma idioma) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -52,7 +55,7 @@ public class FrmAltaPersona extends JFrame {
 			}
 		});
 		String[] departamentos=new String[] {"Artigas","Canelones","Cerro Largo","Colonia","Durazno","Flores","Florida","Lavalleja","Maldonado","Montevideo","Paysandú","Río Negro","Rivera","Rocha","Salto","San José","Soriano","Tacuarembo","Treinta yTres"};
-		
+		this.idioma=idioma;
 		this.menu=frmMenu;
 		this.personas=personas;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
