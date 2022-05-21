@@ -6,9 +6,10 @@ import java.util.LinkedList;
 
 import logica.exception.VehiculoException;
 
-public class Persona {
+public class Persona implements Comparable<Persona>{
 	
 	private int idPersona;
+	private static int ultimoId=1;
 	private String nombre;
 	private String apellido;
 	private String deptoResidencia;
@@ -30,7 +31,7 @@ public class Persona {
 	public Persona( String nombre, String apellido, String deptoResidencia, byte cantHijos,
 			LocalDate fechaNacimiento) {
 		super();
-		this.idPersona = 0;
+		this.idPersona = ultimoId++;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.deptoResidencia = deptoResidencia;
@@ -131,6 +132,12 @@ public class Persona {
 	public Object[] getVehiculos()
 	{
 		return listaVehiculos.toArray();
+	}
+
+	@Override
+	public int compareTo(Persona o) {
+		
+		return this.idPersona-o.getIdPersona();
 	}
 	
 }

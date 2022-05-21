@@ -14,6 +14,8 @@ import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmVisualizar extends JFrame {
 
@@ -31,7 +33,7 @@ public class FrmVisualizar extends JFrame {
 	public FrmVisualizar(FrmListado frmListado, Persona persona) {
 		form=frmListado;
 		this.persona=persona;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 909, 376);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -108,10 +110,20 @@ public class FrmVisualizar extends JFrame {
 		contentPane.add(lstVehiculos);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				volver();
+			}
+		});
 		btnVolver.setBounds(502, 293, 89, 23);
 		contentPane.add(btnVolver);
 		
 		JButton btnAgregar = new JButton("Agregar");
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				agregarVehiculo();
+			}
+		});
 		btnAgregar.setBounds(194, 293, 89, 23);
 		contentPane.add(btnAgregar);
 		lblNombre.setText(persona.getNombre());
@@ -120,6 +132,23 @@ public class FrmVisualizar extends JFrame {
 		lblHijos.setText(persona.getCantHijos()+"");
 		lblId.setText(persona.getIdPersona()+"");
 		lstVehiculos.setListData(persona.getVehiculos());
+		
+	}
+
+
+	protected void agregarVehiculo() {
+		new FrmAltaVehiculo(this,persona).setVisible(true);;
+		setEnabled(false);
+	}
+
+	public void listadoVehiculo()
+	{
+		lstVehiculos.setListData(persona.getVehiculos());
+	}
+
+	protected void volver() {
+		form.setEnabled(true);
+		dispose();
 		
 	}
 }

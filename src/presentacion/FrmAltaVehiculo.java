@@ -30,6 +30,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class FrmAltaVehiculo extends JFrame {
 
@@ -51,6 +53,12 @@ public class FrmAltaVehiculo extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmAltaVehiculo(FrmVisualizar visualizar,  Persona persona) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				volver();
+			}
+		});
 		this.persona=persona;
 		this.visualizar=visualizar;
 		setTitle("Alta Vehiculo - Dilbert Software");
@@ -89,6 +97,11 @@ public class FrmAltaVehiculo extends JFrame {
 		lblNewLabel_2 = new JLabel("Tipo");
 		
 		cbxTipo = new JComboBox();
+		cbxTipo.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				seleccionado();
+			}
+		});
 		cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"Avi\u00F3n", "Barco"}));
 		
 		lblDistancia = new JLabel("Longitud");
@@ -102,6 +115,11 @@ public class FrmAltaVehiculo extends JFrame {
 		txtDato2.setColumns(10);
 		
 		btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				volver();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -179,6 +197,27 @@ public class FrmAltaVehiculo extends JFrame {
 		}
 	}
 
+	protected void seleccionado() {
+		switch(cbxTipo.getSelectedIndex())
+		{
+			case 1:
+				lblDistancia.setText("Distancia");
+				lblCantidad.setText("Cantidad de pasajero");
+				break;
+			default:
+				lblDistancia.setText("Eslora");
+				lblCantidad.setText("Manga");
+				break;
+		}
+		
+	}
+
+	protected void volver() {
+		visualizar.setEnabled(true);
+		
+		dispose();
+	}
+
 	protected void altaVehiculo() {
 		try {
 			String nombre=txtNombre.getText();
@@ -196,6 +235,8 @@ public class FrmAltaVehiculo extends JFrame {
 				vehiculo=new Barco(nombre,color,longitud,manga);
 			}
 			persona.agregar(vehiculo);
+			visualizar.listadoVehiculo();
+			limpiar();
 			JOptionPane.showMessageDialog(this, "Se agrego correctamente");
 		}catch(NumberFormatException ex)
 		{
@@ -205,6 +246,13 @@ public class FrmAltaVehiculo extends JFrame {
 		{
 			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
+		
+	}
+
+	private void limpiar() {
+		txtDato2.setText("");
+		txtLongitud.setText("");
+		txtNombre.setText("");
 		
 	}
 

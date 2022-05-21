@@ -131,6 +131,7 @@ public class FrmMenu extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("");
+		btnNewButton_1.setToolTipText("Filtro");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				busqueda();
@@ -150,6 +151,7 @@ public class FrmMenu extends JFrame {
 		btnNewButton_1_1.setBounds(16, 202, 66, 74);
 		contentPane.add(btnNewButton_1_1);
 		idioma=new Espaniol();
+		personas=Util.precargado();
 	}
 
 	
@@ -203,19 +205,24 @@ public class FrmMenu extends JFrame {
 		mntmNewMenuItem_3.setText("espaniol");
 		mntmNewMenuItem_4.setText("ingles");
 		mnNewMenu_2.setText("acerca de");
-		
+		btnNewButton.setToolTipText("alta de persona");
+		btnNewButton_1.setToolTipText("filtro");
+		btnNewButton_1_1.setToolTipText("listado de persona");
 	}
 	
 	private void traduccion()
 	{
-		mnNewMenu.setText(idioma.traduccion("archivo"));
-		mntmNewMenuItem.setText(idioma.traduccion("salir"));
-		mnNewMenu_1.setText(idioma.traduccion("persona"));
-		mntmNewMenuItem_1.setText(idioma.traduccion("alta"));
-		mntmNewMenuItem_2.setText(idioma.traduccion("buscar"));
+		mnNewMenu.setText(idioma.traduccion(mnNewMenu.getText()));
+		mntmNewMenuItem.setText(idioma.traduccion(mntmNewMenuItem.getText()));
+		mnNewMenu_1.setText(idioma.traduccion(mnNewMenu_1.getText()));
+		mntmNewMenuItem_1.setText(idioma.traduccion(mntmNewMenuItem_1.getText()));
+		mntmNewMenuItem_2.setText(idioma.traduccion(mntmNewMenuItem_2.getText()));
 		mntmNewMenuItem_3.setText(idioma.traduccion(mntmNewMenuItem_3.getText()));
-		mntmNewMenuItem_4.setText(idioma.traduccion("ingles"));
-		mnNewMenu_2.setText(idioma.traduccion("acerca de"));
+		mntmNewMenuItem_4.setText(idioma.traduccion(mntmNewMenuItem_4.getText()));
+		mnNewMenu_2.setText(idioma.traduccion(mnNewMenu_2.getText()));
+		btnNewButton.setToolTipText(idioma.traduccion(btnNewButton.getToolTipText()));
+		btnNewButton_1.setToolTipText(idioma.traduccion(btnNewButton_1.getToolTipText()));
+		btnNewButton_1_1.setToolTipText(idioma.traduccion(btnNewButton_1_1.getToolTipText()));
 	}
 	
 	
