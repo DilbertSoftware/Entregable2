@@ -200,7 +200,7 @@ public class FrmAltaVehiculo extends JFrame {
 	protected void seleccionado() {
 		switch(cbxTipo.getSelectedIndex())
 		{
-			case 1:
+			case 0:
 				lblDistancia.setText("Distancia");
 				lblCantidad.setText("Cantidad de pasajero");
 				break;
