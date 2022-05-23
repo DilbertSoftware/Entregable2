@@ -13,6 +13,6 @@ public class Ingles extends Idioma{
 		agregar("alta","Registration");
 		agregar("espaniol","Spanish");
 		agregar("ingles","English");
-		
+		agregar("idioma","Language");
 	}
 }

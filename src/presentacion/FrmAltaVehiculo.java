@@ -61,7 +61,7 @@ public class FrmAltaVehiculo extends JFrame {
 		});
 		this.persona=persona;
 		this.visualizar=visualizar;
-		setTitle("Alta Vehiculo - Dilbert Software");
+		setTitle("Alta Veh\u00EDculo - Dilbert Software");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 377, 345);
 		contentPane = 
@@ -109,7 +109,7 @@ public class FrmAltaVehiculo extends JFrame {
 		txtLongitud = new JTextField();
 		txtLongitud.setColumns(10);
 		
-		lblCantidad = new JLabel("Cantidad Pasajero");
+		lblCantidad = new JLabel("Cantidad Pasajeros");
 		
 		txtDato2 = new JTextField();
 		txtDato2.setColumns(10);
@@ -202,7 +202,7 @@ public class FrmAltaVehiculo extends JFrame {
 		{
 			case 0:
 				lblDistancia.setText("Distancia");
-				lblCantidad.setText("Cantidad de pasajero");
+				lblCantidad.setText("Cantidad de pasajeros");
 				break;
 			default:
 				lblDistancia.setText("Eslora");
@@ -237,10 +237,10 @@ public class FrmAltaVehiculo extends JFrame {
 			persona.agregar(vehiculo);
 			visualizar.listadoVehiculo();
 			limpiar();
-			JOptionPane.showMessageDialog(this, "Se agrego correctamente");
+			JOptionPane.showMessageDialog(this, "Se agreg\u00F3 correctamente");
 		}catch(NumberFormatException ex)
 		{
-			JOptionPane.showMessageDialog(this, "Tiene que ser numerico");
+			JOptionPane.showMessageDialog(this, "Tiene que ser num\u00E9rico");
 		}
 		catch(Exception ex)
 		{

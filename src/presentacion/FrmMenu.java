@@ -92,7 +92,7 @@ public class FrmMenu extends JFrame {
 		});
 		mnNewMenu_3.add(mntmNewMenuItem_3);
 		
-		mntmNewMenuItem_4 = new JMenuItem("Ingles");
+		mntmNewMenuItem_4 = new JMenuItem("Ingl\u00E9s");
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				idiomaIngles();
@@ -208,6 +208,7 @@ public class FrmMenu extends JFrame {
 		btnNewButton.setToolTipText("alta de persona");
 		btnNewButton_1.setToolTipText("filtro");
 		btnNewButton_1_1.setToolTipText("listado de persona");
+		mnNewMenu_3.setText("idioma");
 	}
 	
 	private void traduccion()
@@ -220,6 +221,7 @@ public class FrmMenu extends JFrame {
 		mntmNewMenuItem_3.setText(idioma.traduccion(mntmNewMenuItem_3.getText()));
 		mntmNewMenuItem_4.setText(idioma.traduccion(mntmNewMenuItem_4.getText()));
 		mnNewMenu_2.setText(idioma.traduccion(mnNewMenu_2.getText()));
+		mnNewMenu_3.setText(idioma.traduccion(mnNewMenu_3.getText()));
 		btnNewButton.setToolTipText(idioma.traduccion(btnNewButton.getToolTipText()));
 		btnNewButton_1.setToolTipText(idioma.traduccion(btnNewButton_1.getToolTipText()));
 		btnNewButton_1_1.setToolTipText(idioma.traduccion(btnNewButton_1_1.getToolTipText()));

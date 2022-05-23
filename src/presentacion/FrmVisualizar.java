@@ -23,6 +23,7 @@ public class FrmVisualizar extends JFrame {
 	private FrmListado form;
 	private Persona persona;
 	private JList<Object> lstVehiculos;
+	private JLabel lblNacimiento;
 
 
 	/**
@@ -82,7 +83,7 @@ public class FrmVisualizar extends JFrame {
 		lblNewLabel_15.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel_15);
 		
-		JLabel lblNacimiento = new JLabel("Nacimiento");
+		lblNacimiento = new JLabel("Nacimiento");
 		panel.add(lblNacimiento);
 		
 		JLabel lblNewLabel_7 = new JLabel("Departamento");
@@ -132,6 +133,7 @@ public class FrmVisualizar extends JFrame {
 		lblHijos.setText(persona.getCantHijos()+"");
 		lblId.setText(persona.getIdPersona()+"");
 		lstVehiculos.setListData(persona.getVehiculos());
+		lblNacimiento.setText(persona.getFechaNacimiento().toString());
 		
 	}
 

@@ -1,7 +1,4 @@
-package 
-presentacion;
-
-
+package presentacion;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,9 +29,7 @@ public class Programa extends JFrame {
 	{
 		new Programa().setVisible(true);
 	}
-	/**
-	 * Create the frame.
-	 */
+
 	public Programa() {
 		setUndecorated(true);
 		ultimaImagen=0;

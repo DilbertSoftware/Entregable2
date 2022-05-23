@@ -13,12 +13,12 @@ public class Espaniol extends Idioma{
 		agregar("acerca de","Acerca de");
 		agregar("buscar","Buscar");
 		agregar("alta","Alta");
-		agregar("espaniol","Español");
-		agregar("ingles","Ingles");
+		agregar("espaniol","Espa\u00F1ol");
+		agregar("ingles","Ingl\u00E9s");
 		agregar("alta de persona","Alta de persona");
 		agregar("filtro","Filtro");
 		agregar("listado de persona","listado de persona");
-		
+		agregar("idioma","Idioma");
 		
 	}
 	

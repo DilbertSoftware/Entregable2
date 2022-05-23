@@ -46,6 +46,7 @@ public class FrmListado extends JFrame {
 				volver();
 			}
 		});
+		
 		this.menu=menu;
 		this.personas=personas;
 		this.idioma=idioma;
