@@ -27,6 +27,7 @@ public class Programa extends JFrame {
 
 	public static void main(String args[])
 	{
+		
 		new Programa().setVisible(true);
 	}
 
@@ -116,5 +117,6 @@ public class Programa extends JFrame {
 	     timer = new Timer();
 	     // Dentro de 0 milisegundos avísame cada 1000 milisegundos
 	     timer.scheduleAtFixedRate(tarea, 0, 2000);
+	     setLocationRelativeTo(null);
 	}
 }

@@ -1,6 +1,8 @@
 package logica;
 
-public class Avion extends Vehiculo{
+import java.io.Serializable;
+
+public class Avion extends Vehiculo implements Serializable{
 
 	private double longitud;
 	private int cantPasajeros;

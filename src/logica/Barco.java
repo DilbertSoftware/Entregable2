@@ -1,6 +1,8 @@
 package logica;
 
-public class Barco extends Vehiculo{
+import java.io.Serializable;
+
+public class Barco extends Vehiculo  implements Serializable{
 	private double eslora;
 	private double manga;
 	public Barco(String nombre, String color, double eslora, double manga) {

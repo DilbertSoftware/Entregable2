@@ -16,6 +16,7 @@ import logica.Util;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -26,6 +27,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.awt.Toolkit;
 
@@ -66,6 +73,11 @@ public class FrmMenu extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		mntmNewMenuItem = new JMenuItem("Salir");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				salir();
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		mnNewMenu_1 = new JMenu("Persona");
@@ -102,6 +114,12 @@ public class FrmMenu extends JFrame {
 		mnNewMenu_3.add(mntmNewMenuItem_4);
 		
 		mnNewMenu_2 = new JMenu("Acerca de");
+		mnNewMenu_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				acercaDe();
+			}
+		});
 		mnNewMenu_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				acercaDe();
@@ -162,13 +180,50 @@ public class FrmMenu extends JFrame {
 		
 		
 		idioma=new Espaniol();
-		personas=Util.precargado();
+		
+		
+		try {
+			ObjectInputStream oos = new ObjectInputStream(new FileInputStream("sistema.bin"));
+			personas=(LinkedList<Persona>)oos.readObject();
+			oos.close();
+		}  catch (IOException e1) {
+			personas=Util.precargado();
+		}catch (Exception e1) {
+			JOptionPane.showMessageDialog(this, "Error inesperado, se cargara los datos por defecto");
+			personas=Util.precargado();
+		}
+		
+		setLocationRelativeTo(null);
+	}
+
+	protected void salir() {
+		
+		try {
+			int pregunta=JOptionPane.showConfirmDialog(this, "Realmente desea salir");
+			if(pregunta==JOptionPane.YES_OPTION)
+			{
+				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("sistema.bin"));
+				oos.writeObject(personas);
+				oos.close();
+				JOptionPane.showMessageDialog(this,"Se respaldo correctamente");
+				System.exit(0);
+			}
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(this, "No existe la ubicación del archivo");
+			e.printStackTrace();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, "Fallo el respaldo del archivo");
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 	protected void acercaDe() {
 		new FrmAcerca(this).setVisible(true);
 		
-		dispose();
+		setEnabled(false);
 		
 	}
 

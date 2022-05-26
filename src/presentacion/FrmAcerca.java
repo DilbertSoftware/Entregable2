@@ -43,8 +43,8 @@ public class FrmAcerca extends JFrame {
 		setUndecorated(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmAcerca.class.getResource("/imagenes/logo.png")));
 		setTitle("Acerca de - Dilbert Software");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 987, 853);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setBounds(100, 100, 902, 511);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -56,7 +56,7 @@ public class FrmAcerca extends JFrame {
 		lblNewLabel.setVerifyInputWhenFocusTarget(false);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		Image img= new ImageIcon(FrmAcerca.class.getResource("/imagenes/acerca.png")).getImage();
-		ImageIcon img2=new ImageIcon(img.getScaledInstance(1200, 720, Image.SCALE_SMOOTH));
+		ImageIcon img2=new ImageIcon(img.getScaledInstance(800, 400, Image.SCALE_SMOOTH));
 		lblNewLabel.setIcon(img2);
 		contentPane.add(lblNewLabel, BorderLayout.CENTER);
 		
@@ -67,6 +67,7 @@ public class FrmAcerca extends JFrame {
 			}
 		});
 		contentPane.add(btnNewButton, BorderLayout.NORTH);
+		setLocationRelativeTo(null);
 	}
 
 	protected void volver() {

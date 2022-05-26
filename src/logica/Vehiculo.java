@@ -1,6 +1,8 @@
 package logica;
 
-public class Vehiculo {
+import java.io.Serializable;
+
+public class Vehiculo  implements Serializable{
 	private int idVehiculo;
 	private String nombre;
 	private String color;

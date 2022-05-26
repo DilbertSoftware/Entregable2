@@ -1,12 +1,13 @@
 package logica;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 import logica.exception.VehiculoException;
 
-public class Persona implements Comparable<Persona>{
+public class Persona implements Comparable<Persona>, Serializable{
 	
 	private int idPersona;
 	private static int ultimoId=1;
