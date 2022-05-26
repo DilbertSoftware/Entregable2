@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import logica.Persona;
+import tabla.TablaVehiculo;
 
 import javax.swing.JLabel;
 import java.awt.GridLayout;
@@ -16,14 +17,18 @@ import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JTable;
+import java.awt.Toolkit;
 
 public class FrmVisualizar extends JFrame {
 
 	private JPanel contentPane;
 	private FrmListado form;
 	private Persona persona;
-	private JList<Object> lstVehiculos;
 	private JLabel lblNacimiento;
+	private JTable tblVehiculos;
 
 
 	/**
@@ -32,6 +37,13 @@ public class FrmVisualizar extends JFrame {
 	 * @param frmListado 
 	 */
 	public FrmVisualizar(FrmListado frmListado, Persona persona) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmVisualizar.class.getResource("/imagenes/logo.png")));
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				volver();
+			}
+		});
 		form=frmListado;
 		this.persona=persona;
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -106,10 +118,6 @@ public class FrmVisualizar extends JFrame {
 		JLabel lblHijos = new JLabel("2");
 		panel.add(lblHijos);
 		
-		lstVehiculos = new JList();
-		lstVehiculos.setBounds(317, 34, 532, 248);
-		contentPane.add(lstVehiculos);
-		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,20 +140,25 @@ public class FrmVisualizar extends JFrame {
 		lblDepartamento.setText(persona.getDeptoResidencia());
 		lblHijos.setText(persona.getCantHijos()+"");
 		lblId.setText(persona.getIdPersona()+"");
-		lstVehiculos.setListData(persona.getVehiculos());
 		lblNacimiento.setText(persona.getFechaNacimiento().toString());
 		
+		tblVehiculos = new JTable();
+		tblVehiculos.setBounds(317, 34, 566, 248);
+		contentPane.add(tblVehiculos);
+		setTitle(persona.getNombre()+" "+persona.getApellido()+" - Dilbert Software");
+		this.tblVehiculos.setModel(new TablaVehiculo(persona.getVehiculos()));
 	}
 
 
 	protected void agregarVehiculo() {
-		new FrmAltaVehiculo(this,persona).setVisible(true);;
+		new FrmAltaVehiculo(this,persona).setVisible(true);
 		setEnabled(false);
 	}
 
 	public void listadoVehiculo()
 	{
-		lstVehiculos.setListData(persona.getVehiculos());
+		this.tblVehiculos.setModel(new TablaVehiculo(persona.getVehiculos()));
+		
 	}
 
 	protected void volver() {

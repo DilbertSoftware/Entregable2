@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import logica.Idioma;
 import logica.Persona;
+import tabla.TablaPersona;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -31,12 +32,12 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Toolkit;
+import javax.swing.JTable;
 
 public class FrmBusqueda extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNombre;
-	private JList<Object> lstResultado;
 	private JComboBox cbxMinimoHijo;
 	private JComboBox cbxMaximoHijos;
 	private JComboBox cbxMinimoEdad;
@@ -47,6 +48,7 @@ public class FrmBusqueda extends JFrame {
 	private JCheckBox chkEdad;
 	private JCheckBox chkHijos;
 	private Idioma idioma;
+	private JTable tblPersona;
 	/**
 	 * Create the frame.
 	 * @param idioma 
@@ -76,7 +78,7 @@ public class FrmBusqueda extends JFrame {
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 215, 377);
+		panel_1.setBounds(0, 0, 215, 407);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -103,11 +105,11 @@ public class FrmBusqueda extends JFrame {
 		panel_1.add(lblNewLabel_1);
 		
 		cbxMinimoHijo = new JComboBox();
-		cbxMinimoHijo.setBounds(40, 155, 30, 22);
+		cbxMinimoHijo.setBounds(40, 155, 61, 22);
 		panel_1.add(cbxMinimoHijo);
 		
 		cbxMaximoHijos = new JComboBox();
-		cbxMaximoHijos.setBounds(160, 155, 30, 22);
+		cbxMaximoHijos.setBounds(139, 155, 51, 22);
 		panel_1.add(cbxMaximoHijos);
 		
 		JLabel lblNewLabel_2 = new JLabel("M\u00EDnimo");
@@ -127,11 +129,11 @@ public class FrmBusqueda extends JFrame {
 		panel_1.add(lblNewLabel_2_1);
 		
 		cbxMinimoEdad = new JComboBox();
-		cbxMinimoEdad.setBounds(40, 245, 30, 22);
+		cbxMinimoEdad.setBounds(40, 245, 61, 22);
 		panel_1.add(cbxMinimoEdad);
 		
 		cbxMaximoEdad = new JComboBox();
-		cbxMaximoEdad.setBounds(160, 245, 30, 22);
+		cbxMaximoEdad.setBounds(139, 245, 51, 22);
 		panel_1.add(cbxMaximoEdad);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("M\u00E1ximo");
@@ -168,13 +170,13 @@ public class FrmBusqueda extends JFrame {
 		txtTituloBusqueda.setFont(new Font("Tahoma", Font.BOLD, 13));
 		txtTituloBusqueda.setEditable(false);
 		txtTituloBusqueda.setText("Realice una b\u00FAsqueda de persona por filtrado");
-		txtTituloBusqueda.setBounds(225, 22, 410, 35);
+		txtTituloBusqueda.setBounds(225, 22, 426, 35);
 		panel.add(txtTituloBusqueda);
 		
-		lstResultado = new JList();
-		lstResultado.setBounds(225, 68, 410, 284);
-		panel.add(lstResultado);
-		lstResultado.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		tblPersona = new JTable(new TablaPersona(personas));
+		tblPersona.setBounds(225, 68, 426, 339);
+		
+		panel.add(tblPersona);
 		for(int hijo=0;hijo<=10;hijo++)
 		{
 			cbxMinimoHijo.addItem(hijo+"");
@@ -189,7 +191,7 @@ public class FrmBusqueda extends JFrame {
 		}
 		//Proxima mejoras
 		//this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-
+		
 	}
 
 	protected void volver() {
@@ -228,7 +230,7 @@ public class FrmBusqueda extends JFrame {
 				
 			}
 		}
-		lstResultado.setListData(resultado.toArray());
 		
+		this.tblPersona.setModel(new TablaPersona(resultado));
 	}
 }

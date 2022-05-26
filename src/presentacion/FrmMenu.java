@@ -47,6 +47,7 @@ public class FrmMenu extends JFrame {
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_1_1;
+	private JPanel panel;
 
 
 	/**
@@ -101,6 +102,11 @@ public class FrmMenu extends JFrame {
 		mnNewMenu_3.add(mntmNewMenuItem_4);
 		
 		mnNewMenu_2 = new JMenu("Acerca de");
+		mnNewMenu_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				acercaDe();
+			}
+		});
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuBar menuBar_1 = new JMenuBar();
@@ -109,14 +115,20 @@ public class FrmMenu extends JFrame {
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		
+		panel = new JPanel();
+		contentPane.add(panel, BorderLayout.WEST);
+		panel.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/logo.png")));
-		lblNewLabel.setBounds(113, 11, 473, 440);
 		contentPane.add(lblNewLabel);
 		
 		btnNewButton = new JButton("");
+		btnNewButton.setOpaque(false);
+		btnNewButton.setBackground(Color.WHITE);
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,8 +139,7 @@ public class FrmMenu extends JFrame {
 		personas=new LinkedList<>();
 		btnNewButton.setToolTipText("Alta de persona");
 		btnNewButton.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/botonAgregar.png")));
-		btnNewButton.setBounds(10, 11, 72, 74);
-		contentPane.add(btnNewButton);
+		panel.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("");
 		btnNewButton_1.setToolTipText("Filtro");
@@ -138,8 +149,7 @@ public class FrmMenu extends JFrame {
 			}
 		});
 		btnNewButton_1.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/botonBuscar.png")));
-		btnNewButton_1.setBounds(16, 109, 66, 74);
-		contentPane.add(btnNewButton_1);
+		panel.add(btnNewButton_1);
 		
 		btnNewButton_1_1 = new JButton("");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -148,13 +158,19 @@ public class FrmMenu extends JFrame {
 			}
 		});
 		btnNewButton_1_1.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/botonListado.png")));
-		btnNewButton_1_1.setBounds(16, 202, 66, 74);
-		contentPane.add(btnNewButton_1_1);
+		panel.add(btnNewButton_1_1);
+		
+		
 		idioma=new Espaniol();
 		personas=Util.precargado();
 	}
 
-	
+	protected void acercaDe() {
+		new FrmAcerca(this).setVisible(true);
+		
+		dispose();
+		
+	}
 
 	protected void idiomaIngles() {
 		idioma=new Ingles();
@@ -162,8 +178,6 @@ public class FrmMenu extends JFrame {
 		porDefecto();
 		traduccion();
 	}
-
-
 
 	protected void idiomaEspaniol() {
 		idioma=new Espaniol();

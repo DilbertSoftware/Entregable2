@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import logica.Idioma;
 import logica.Persona;
 import logica.ordenamiento.OrdernarPorEdad;
+import tabla.TablaPersona;
 
 import javax.swing.JList;
 import javax.swing.JButton;
@@ -22,14 +23,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JTable;
 
 public class FrmListado extends JFrame {
 
 	private JPanel contentPane;
-	private JList<Object> lstPersona;
 	private FrmMenu menu;
 	private LinkedList<Persona>personas;
 	private Idioma idioma;
+	private JTable tblPersona;
 
 	/**
 	 * Create the frame.
@@ -56,16 +58,6 @@ public class FrmListado extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		lstPersona = new JList();
-		lstPersona.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				seleccionarPersona();
-			}
-		});
-		lstPersona.setBounds(22, 30, 394, 295);
-		this.lstPersona.setListData(personas.toArray());
-		contentPane.add(lstPersona);
 		
 		JButton btnNewButton = new JButton("Listado");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -112,40 +104,36 @@ public class FrmListado extends JFrame {
 		btnVolver.setBounds(426, 302, 120, 23);
 		contentPane.add(btnVolver);
 		
+		tblPersona = new JTable(new TablaPersona(personas));
+		tblPersona.setBounds(22, 36, 394, 293);
+		contentPane.add(tblPersona);
+		
 	}
 
 	protected void listadoEdad() {
 		Collections.sort(personas,new OrdernarPorEdad());
-		lstPersona.setListData(personas.toArray());
+		tblPersona.setModel(new TablaPersona(personas));
 	}
 
 	protected void ordenarReversa() {
 		Collections.reverse(personas);
-		lstPersona.setListData(personas.toArray());
+		tblPersona.setModel(new TablaPersona(personas));
 		
 	}
 
 	protected void listadoOrdenado() {
 		Collections.sort(personas);
-		lstPersona.setListData(personas.toArray());
+		tblPersona.setModel(new TablaPersona(personas));
 		
 	}
 
 	protected void visualizar() {
-		if(this.lstPersona.getSelectedIndex()>=0)
+		if(this.tblPersona.getSelectedRow()>=0)
 		{
-			Persona persona=(Persona)this.lstPersona.getSelectedValue();
+			int posicion=this.tblPersona.getSelectedRow();
+			Persona persona=personas.get(posicion);
 			new FrmVisualizar(this,persona).setVisible(true);;
 			setEnabled(false);
-		}
-		
-	}
-
-	protected void seleccionarPersona() {
-		if(this.lstPersona.getSelectedIndex()>=0)
-		{
-			Persona persona=(Persona)this.lstPersona.getSelectedValue();
-			
 		}
 		
 	}
