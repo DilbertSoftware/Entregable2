@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 
 public class PnlGraficoEstadisticas extends JPanel {
@@ -49,9 +50,7 @@ public class PnlGraficoEstadisticas extends JPanel {
 	public PnlGraficoEstadisticas(LinkedList<Persona>personas) {
 		setLayout(null);
 		this.personas=personas;
-		
 
-		
 		JLabel lbl3 = new JLabel("");
 		lbl3.setIcon(new ImageIcon(PnlGraficoEstadisticas.class.getResource("/imagenes/avion.png")));
 		lbl3.setBounds(10, 48, 69, 49);
@@ -59,7 +58,7 @@ public class PnlGraficoEstadisticas extends JPanel {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(PnlGraficoEstadisticas.class.getResource("/imagenes/barco.png")));
-		lblNewLabel_1.setBounds(115, 42, 69, 55);
+		lblNewLabel_1.setBounds(187, 48, 69, 55);
 		add(lblNewLabel_1);
 		
 		lblBarco = new JLabel("New label");
@@ -67,25 +66,25 @@ public class PnlGraficoEstadisticas extends JPanel {
 		add(lblBarco);
 		
 		lblAvion = new JLabel("New label");
-		lblAvion.setBounds(135, 114, 26, 14);
+		lblAvion.setBounds(214, 114, 26, 14);
 		add(lblAvion);
 		lblAvion.setText(cantidadAviones+"");
 		lblBarco.setText(cantidadBarcos+"");
 		
 		lblNewLabel = new JLabel("Estadisticas");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(54, 11, 90, 14);
+		lblNewLabel.setBounds(166, 11, 90, 14);
 		add(lblNewLabel);
 		
 		lblNewLabel_2 = new JLabel();
 		Image img= new ImageIcon(PnlGraficoEstadisticas.class.getResource("/imagenes/persona.png")).getImage();
 		ImageIcon img2=new ImageIcon(img.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 		lblNewLabel_2.setIcon(img2);
-		lblNewLabel_2.setBounds(214, 26, 80, 71);
+		lblNewLabel_2.setBounds(313, 26, 80, 71);
 		add(lblNewLabel_2);
 		
 		lblUsuario = new JLabel("New label");
-		lblUsuario.setBounds(248, 114, 46, 14);
+		lblUsuario.setBounds(347, 108, 46, 14);
 		add(lblUsuario);
 		lblUsuario.setText(personas.size()+"");
 		
@@ -101,7 +100,7 @@ public class PnlGraficoEstadisticas extends JPanel {
 		
 		lblUruguay = new JLabel("");
 		lblUruguay.setIcon(new ImageIcon(PnlGraficoEstadisticas.class.getResource("/imagenes/mapaUruguay.png")));
-		lblUruguay.setBounds(0, 150, 393, 431);
+		lblUruguay.setBounds(10, 150, 393, 431);
 		add(lblUruguay);
 		
 		lblPaysandu = new JLabel("");
@@ -214,6 +213,14 @@ public class PnlGraficoEstadisticas extends JPanel {
 	
 	private void calcular()
 	{
+		cantidadAviones=0;
+		cantidadBarcos=0;
+		
+		for(JLabel label:listadoDepartamentos.values())
+		{
+			label.setToolTipText("0");
+		}
+		
 		for(Persona persona:personas)
 		{
 			try
@@ -225,11 +232,18 @@ public class PnlGraficoEstadisticas extends JPanel {
 				departamento.setToolTipText(cantidad+"");
 			}catch(Exception ex)
 			{
-				ex.printStackTrace();
+				
 			}
 			
 			
 		}
+	}
+	
+	public void paint(Graphics g)
+	{
+		
+		calcular();
+		super.paint(g);
 	}
 	
 }

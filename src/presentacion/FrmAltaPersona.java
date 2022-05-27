@@ -169,5 +169,6 @@ public class FrmAltaPersona extends JFrame {
 	{
 		persona.setIdPersona(personas.size()+1);
 		personas.add(persona);
+		menu.repaint();
 	}
 }

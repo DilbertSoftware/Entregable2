@@ -73,7 +73,7 @@ public class FrmMenu extends JFrame {
 		setTitle("Dilbert Software");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmMenu.class.getResource("/imagenes/logo.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1206, 656);
+		setBounds(20, 100, 1206, 656);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -87,8 +87,8 @@ public class FrmMenu extends JFrame {
 				salir();
 			}
 		});
-		mnNewMenu.add(mntmNewMenuItem);
 		
+		mnNewMenu.add(mntmNewMenuItem);
 		mnNewMenu_1 = new JMenu("Persona");
 		menuBar.add(mnNewMenu_1);
 		
@@ -200,12 +200,7 @@ public class FrmMenu extends JFrame {
 		ImageIcon img2=new ImageIcon(img.getScaledInstance(180, 180, Image.SCALE_SMOOTH));
 		lblNewLabel.setIcon(img2);
 		panel_2.add(lblNewLabel);
-		
-		
-		
-		
 		idioma=new Espaniol();
-		
 		
 		try {
 			ObjectInputStream oos = new ObjectInputStream(new FileInputStream("sistema.bin"));
@@ -247,9 +242,6 @@ public class FrmMenu extends JFrame {
 			JOptionPane.showMessageDialog(this, "Fallo el respaldo del archivo");
 			e.printStackTrace();
 		}
-		
-		
-		
 	}
 
 	protected void acercaDe() {
@@ -273,15 +265,11 @@ public class FrmMenu extends JFrame {
 		traduccion();
 	}
 
-
-
 	protected void listado() {
 		FrmListado formulario=new FrmListado(this,personas,idioma);
 		formulario.setVisible(true);
 		
 	}
-
-
 
 	protected void busqueda() {
 		FrmBusqueda formulario=new FrmBusqueda(this,personas,idioma);
@@ -331,9 +319,6 @@ public class FrmMenu extends JFrame {
 	public void paint(Graphics g)
     {
 		super.paint(g);
-		//pnlEdades.paint(g);
-		
     }
-    
-	
+
 }

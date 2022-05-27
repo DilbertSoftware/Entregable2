@@ -36,6 +36,14 @@ public class PnlGraficoEdad extends JPanel {
 		menorEdad=Integer.MAX_VALUE;
 		mayorEdad=0;
 		sumaEdades=0;
+		
+		
+		
+	}
+	
+	private void calcular()
+	{
+		resultado=new double[etapas.length];
 		for(Persona persona : personas)
 		{
 			if(persona.edad()<18)
@@ -56,16 +64,12 @@ public class PnlGraficoEdad extends JPanel {
 				if(mayorEdad<persona.edad())
 					mayorEdad=persona.edad();
 		}
-		
-		
 	}
-	
-
 	
 	public void paint(Graphics g)
     {
         
-        	
+        	calcular();
             double suma=0;
             int grados[]=new int[etapas.length];
             
