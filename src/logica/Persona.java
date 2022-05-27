@@ -140,5 +140,29 @@ public class Persona implements Comparable<Persona>, Serializable{
 		
 		return this.idPersona-o.getIdPersona();
 	}
-	
+
+	public int cantidadAviones() {
+		int contador=0;
+		for(Vehiculo vehiculo:listaVehiculos)
+		{
+			if(vehiculo instanceof Avion)
+			{
+				contador++;
+			}
+		}
+		return contador;
+	}
+
+	public int cantidadBarcos() 
+	{
+		int contador=0;
+		for(Vehiculo vehiculo:listaVehiculos)
+		{
+			if(vehiculo instanceof Barco)
+			{
+				contador++;
+			}
+		}
+		return contador;
+	}
 }

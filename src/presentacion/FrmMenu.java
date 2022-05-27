@@ -2,6 +2,7 @@ package presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,6 +20,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -55,6 +58,12 @@ public class FrmMenu extends JFrame {
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_1_1;
 	private JPanel panel;
+	private JMenuItem mntmNewMenuItem_5;
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private JLabel lblNewLabel;
+	private JPanel pnlEdades;
+	private JPanel panel_3;
 
 
 	/**
@@ -64,7 +73,7 @@ public class FrmMenu extends JFrame {
 		setTitle("Dilbert Software");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmMenu.class.getResource("/imagenes/logo.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 719, 480);
+		setBounds(100, 100, 1206, 656);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -93,6 +102,9 @@ public class FrmMenu extends JFrame {
 		
 		mntmNewMenuItem_2 = new JMenuItem("Buscar");
 		mnNewMenu_1.add(mntmNewMenuItem_2);
+		
+		mntmNewMenuItem_5 = new JMenuItem("Listado");
+		mnNewMenu_1.add(mntmNewMenuItem_5);
 		
 		mnNewMenu_3 = new JMenu("Idioma");
 		menuBar.add(mnNewMenu_3);
@@ -140,10 +152,6 @@ public class FrmMenu extends JFrame {
 		contentPane.add(panel, BorderLayout.WEST);
 		panel.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/logo.png")));
-		contentPane.add(lblNewLabel);
-		
 		btnNewButton = new JButton("");
 		btnNewButton.setOpaque(false);
 		btnNewButton.setBackground(Color.WHITE);
@@ -178,6 +186,23 @@ public class FrmMenu extends JFrame {
 		btnNewButton_1_1.setIcon(new ImageIcon(FrmMenu.class.getResource("/imagenes/botonListado.png")));
 		panel.add(btnNewButton_1_1);
 		
+		panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		panel_2 = new JPanel();
+		panel_1.add(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		lblNewLabel = new JLabel("");
+		
+		Image img= new ImageIcon(FrmMenu.class.getResource("/imagenes/logo.png")).getImage();
+		ImageIcon img2=new ImageIcon(img.getScaledInstance(180, 180, Image.SCALE_SMOOTH));
+		lblNewLabel.setIcon(img2);
+		panel_2.add(lblNewLabel);
+		
+		
+		
 		
 		idioma=new Espaniol();
 		
@@ -194,6 +219,13 @@ public class FrmMenu extends JFrame {
 		}
 		
 		setLocationRelativeTo(null);
+		pnlEdades = new PnlGraficoEdad(personas);
+		
+		panel_1.add(pnlEdades);
+		
+		panel_3 = new PnlGraficoEstadisticas(personas);
+		panel_1.add(panel_3);
+		
 	}
 
 	protected void salir() {
@@ -296,5 +328,12 @@ public class FrmMenu extends JFrame {
 		btnNewButton_1_1.setToolTipText(idioma.traduccion(btnNewButton_1_1.getToolTipText()));
 	}
 	
+	public void paint(Graphics g)
+    {
+		super.paint(g);
+		//pnlEdades.paint(g);
+		
+    }
+    
 	
 }
