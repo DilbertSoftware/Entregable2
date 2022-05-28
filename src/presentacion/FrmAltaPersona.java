@@ -25,11 +25,13 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import java.awt.Toolkit;
+import static java.time.temporal.ChronoUnit.DAYS;
 public class FrmAltaPersona extends JFrame {
 
 	private JPanel contentPane;
@@ -41,13 +43,15 @@ public class FrmAltaPersona extends JFrame {
 	private JComboBox<String> cbxCantidadHijos;
 	private DatePicker picker;
 	private Idioma idioma;
-
+	
 
 	/**
 	 * Create the frame.
 	 * @param idioma 
 	 */
 	public FrmAltaPersona(FrmMenu frmMenu, LinkedList<Persona> personas, Idioma idioma) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmAltaPersona.class.getResource("/imagenes/logo.png")));
+		setTitle("Agregar persona - Dilbert Software");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -90,6 +94,7 @@ public class FrmAltaPersona extends JFrame {
 		picker = new JDatePicker();
         picker.setTextEditable(true);
         picker.setShowYearButtons(true);
+        
         panel.add((JComponent) picker);
 		contentPane.add(panel);
 		
@@ -148,17 +153,40 @@ public class FrmAltaPersona extends JFrame {
 	protected void agregar()  {
 		try {
 			String nombre=txtNombre.getText();
-			String apellido=txtApellido.getText();
-			String departamento=cbxDepartamento.getSelectedItem().toString();
-			byte cantidadHijos=(byte) cbxCantidadHijos.getSelectedIndex();
-			int dia=picker.getModel().getDay();
-			int mes=picker.getModel().getMonth();
-			int anio=picker.getModel().getYear();
-			LocalDate fechaNacimiento=LocalDate.of(anio, mes, dia);
-			Persona persona=new Persona(nombre, apellido, departamento, cantidadHijos, fechaNacimiento);
-		
-			agregar(persona);
-			JOptionPane.showMessageDialog(this, "Se ingreso correctamente");
+			if(nombre.trim().equals(""))
+			{
+				JOptionPane.showMessageDialog(this, "El nombre es obligatorio");
+			}
+			else
+			{
+				String apellido=txtApellido.getText();
+				if(apellido.trim().equals(""))
+				{
+					JOptionPane.showMessageDialog(this, "El apellido es obligatorio");
+				}
+			
+				else {
+					int dia=picker.getModel().getDay();
+					int mes=picker.getModel().getMonth();
+					int anio=picker.getModel().getYear();
+					LocalDate fechaNacimiento=LocalDate.of(anio, mes, dia);
+					
+					if(fechaNacimiento.compareTo(LocalDate.now())>0)
+					{
+						JOptionPane.showMessageDialog(this,"Todavia no ha nacido");
+					}
+					else
+					{
+						String departamento=cbxDepartamento.getSelectedItem().toString();
+						byte cantidadHijos=(byte) cbxCantidadHijos.getSelectedIndex();
+						
+						Persona persona=new Persona(nombre, apellido, departamento, cantidadHijos, fechaNacimiento);
+					
+						agregar(persona);
+						JOptionPane.showMessageDialog(this, "Se ingreso correctamente");
+					}
+				}
+			}
 		} catch (CapacidadLlenaException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(),"Sistema...",JOptionPane.OK_OPTION);
 		}

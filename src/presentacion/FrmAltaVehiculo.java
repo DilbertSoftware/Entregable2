@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Toolkit;
 
 public class FrmAltaVehiculo extends JFrame {
 
@@ -53,6 +54,7 @@ public class FrmAltaVehiculo extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmAltaVehiculo(FrmVisualizar visualizar,  Persona persona) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmAltaVehiculo.class.getResource("/imagenes/logo.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -126,10 +128,7 @@ public class FrmAltaVehiculo extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(24)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-							.addGap(98)
-							.addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
@@ -143,7 +142,8 @@ public class FrmAltaVehiculo extends JFrame {
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 										.addComponent(txtLongitud, Alignment.LEADING)
 										.addComponent(txtDato2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-										.addComponent(cbxTipo, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(cbxTipo, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(11)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -151,7 +151,7 @@ public class FrmAltaVehiculo extends JFrame {
 										.addComponent(cbxColor, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE))
 									.addGap(10)
 									.addComponent(lblColor, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))))
-					.addContainerGap(78, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -185,8 +185,8 @@ public class FrmAltaVehiculo extends JFrame {
 						.addComponent(txtDato2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(39)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnVolver)
-						.addComponent(btnNewButton))
+						.addComponent(btnNewButton)
+						.addComponent(btnVolver))
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
@@ -220,24 +220,32 @@ public class FrmAltaVehiculo extends JFrame {
 
 	protected void altaVehiculo() {
 		try {
+			
 			String nombre=txtNombre.getText();
-			String color=cbxColor.getSelectedItem().toString();
-			String tipo=cbxTipo.getSelectedItem().toString();
-			Vehiculo vehiculo;
-			double longitud=Double.parseDouble(txtLongitud.getText());
-			if(cbxTipo.getSelectedIndex()==0)
+			if(nombre.trim().equalsIgnoreCase(""))
 			{
-				int cantidadPasajero= Integer.parseInt(txtDato2.getText());
-				vehiculo=new Avion(nombre,color,longitud,cantidadPasajero);
+				JOptionPane.showMessageDialog(this, "El nombre es obligatorio");
 			}
-			else {
-				double manga=Double.parseDouble(txtDato2.getText());
-				vehiculo=new Barco(nombre,color,longitud,manga);
+			else
+			{
+			
+				String color=cbxColor.getSelectedItem().toString();
+				Vehiculo vehiculo;
+				double longitud=Double.parseDouble(txtLongitud.getText());
+				if(cbxTipo.getSelectedIndex()==0)
+				{
+					int cantidadPasajero= Integer.parseInt(txtDato2.getText());
+					vehiculo=new Avion(nombre,color,longitud,cantidadPasajero);
+				}
+				else {
+					double manga=Double.parseDouble(txtDato2.getText());
+					vehiculo=new Barco(nombre,color,longitud,manga);
+				}
+				persona.agregar(vehiculo);
+				visualizar.listadoVehiculo();
+				limpiar();
+				JOptionPane.showMessageDialog(this, "Se agreg\u00F3 correctamente");
 			}
-			persona.agregar(vehiculo);
-			visualizar.listadoVehiculo();
-			limpiar();
-			JOptionPane.showMessageDialog(this, "Se agreg\u00F3 correctamente");
 		}catch(NumberFormatException ex)
 		{
 			JOptionPane.showMessageDialog(this, "Tiene que ser num\u00E9rico");
