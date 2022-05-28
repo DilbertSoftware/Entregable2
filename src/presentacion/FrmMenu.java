@@ -101,9 +101,19 @@ public class FrmMenu extends JFrame {
 		mnNewMenu_1.add(mntmNewMenuItem_1);
 		
 		mntmNewMenuItem_2 = new JMenuItem("Buscar");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				busqueda();
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
 		mntmNewMenuItem_5 = new JMenuItem("Listado");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listado();
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_5);
 		
 		mnNewMenu_3 = new JMenu("Idioma");

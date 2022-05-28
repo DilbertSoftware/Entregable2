@@ -44,6 +44,7 @@ public class PnlGraficoEdad extends JPanel {
 	private void calcular()
 	{
 		resultado=new double[etapas.length];
+		sumaEdades=0;
 		for(Persona persona : personas)
 		{
 			if(persona.edad()<18)
